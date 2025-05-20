@@ -46,10 +46,10 @@
 </head>
 <body class="text-center relative">
   <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg z-10 relative">
-    <p class="absolute bottom-4 right-4 text-md text-gray-600 italic">From Suhail</p>
+    <p class="absolute bottom-4 right-4 text-md text-gray-600 italic">-From Suhail</p>
     <h1 class="text-4xl font-bold text-pink-600 mb-4">Happy Birthday, Aarthi!</h1>
     <p class="text-lg text-gray-700 mb-6">
-      Another year, another beautiful chapter in the story of your life. Each page you’ve written so far is filled with strength, kindness, laughter, and unforgettable moments. As you step into this new year, may your journey be filled with fresh dreams, meaningful adventures, and achievements that make your heart proud. You deserve all the happiness this world can offer.
+      Another year, another beautiful chapter in the story of your life. Each page you’ve written so far is filled with kindness, laughter, and unforgettable moments. As you step into this new year, may your journey be filled with fresh dreams, meaningful adventures, achievements and a happy relationship that make your heart feel proud. You deserve all the happiness this world can offer.
     </p>
     <div id="age-timer" class="text-md text-gray-700 mt-4"></div>
   </div>
@@ -75,7 +75,6 @@
     }
 
     function calculateAge() {
-      // Birthdate: May 21, 2006, 00:01:00 IST (UTC+5:30) = May 20, 2006, 18:31:00 UTC
       const birthUTC = new Date(Date.UTC(2006, 4, 20, 18, 31, 0));
       const now = new Date();
 
@@ -86,7 +85,6 @@
       let minutes = now.getUTCMinutes() - birthUTC.getUTCMinutes();
       let seconds = now.getUTCSeconds() - birthUTC.getUTCSeconds();
 
-      // Adjust for negative values
       if (seconds < 0) {
         seconds += 60;
         minutes--;
@@ -109,7 +107,7 @@
         years--;
       }
 
-      const ageText = `You are ${years} years, ${months} months, ${days} days, ` +
+      const ageText = `Congracts you are ${years} years, ${months} months, ${days} days, ` +
         `${hours} hours, ${minutes} minutes, and ${seconds} seconds old!`;
       document.getElementById('age-timer').textContent = ageText;
     }
