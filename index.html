@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday, Aarthi!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #ffafbd, #ffc3a0);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    .flower {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0.6;
+      animation: fall linear infinite;
+      will-change: transform, opacity;
+      user-select: none;
+      pointer-events: none;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+    #age-timer {
+      font-size: 1rem;
+      color: #1f2937;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body class="text-center relative">
+  <div class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg z-10 relative">
+    <p class="absolute bottom-4 right-4 text-md text-gray-600 italic">From Suhail</p>
+    <h1 class="text-4xl font-bold text-pink-600 mb-4">Happy Birthday, Aarthi!</h1>
+    <p class="text-lg text-gray-700 mb-6">
+      Another year, another beautiful chapter in the story of your life. Each page you’ve written so far is filled with strength, kindness, laughter, and unforgettable moments. As you step into this new year, may your journey be filled with fresh dreams, meaningful adventures, and achievements that make your heart proud. You deserve all the happiness this world can offer.
+    </p>
+    <div id="age-timer" class="text-md text-gray-700 mt-4"></div>
+  </div>
+
+  <script>
+    function createFlowers() {
+      const flowers = ['🌸', '🌹', '🌻', '🌷', '🌺'];
+      const count = 20;
+      for (let i = 0; i < count; i++) {
+        const flower = document.createElement('div');
+        flower.className = 'flower';
+        flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+        flower.setAttribute('aria-hidden', 'true');
+        flower.style.left = Math.random() * 100 + 'vw';
+        flower.style.top = '-2rem';
+        flower.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        flower.style.animationDelay = (Math.random() * 5) + 's';
+        flower.style.fontSize = (Math.random() * 10 + 15) + 'px';
+        document.body.appendChild(flower);
+        flower.addEventListener('animationend', () => flower.remove());
+      }
+      setTimeout(createFlowers, 8000);
+    }
+
+    function calculateAge() {
+      // Birthdate: May 21, 2006, 00:01:00 IST (UTC+5:30) = May 20, 2006, 18:31:00 UTC
+      const birthUTC = new Date(Date.UTC(2006, 4, 20, 18, 31, 0));
+      const now = new Date();
+
+      let years = now.getUTCFullYear() - birthUTC.getUTCFullYear();
+      let months = now.getUTCMonth() - birthUTC.getUTCMonth();
+      let days = now.getUTCDate() - birthUTC.getUTCDate();
+      let hours = now.getUTCHours() - birthUTC.getUTCHours();
+      let minutes = now.getUTCMinutes() - birthUTC.getUTCMinutes();
+      let seconds = now.getUTCSeconds() - birthUTC.getUTCSeconds();
+
+      // Adjust for negative values
+      if (seconds < 0) {
+        seconds += 60;
+        minutes--;
+      }
+      if (minutes < 0) {
+        minutes += 60;
+        hours--;
+      }
+      if (hours < 0) {
+        hours += 24;
+        days--;
+      }
+      if (days < 0) {
+        const lastMonth = new Date(now.getUTCFullYear(), now.getUTCMonth(), 0);
+        days += lastMonth.getUTCDate();
+        months--;
+      }
+      if (months < 0) {
+        months += 12;
+        years--;
+      }
+
+      const ageText = `You are ${years} years, ${months} months, ${days} days, ` +
+        `${hours} hours, ${minutes} minutes, and ${seconds} seconds old!`;
+      document.getElementById('age-timer').textContent = ageText;
+    }
+
+    window.onload = () => {
+      createFlowers();
+      calculateAge();
+      setInterval(calculateAge, 1000);
+    };
+  </script>
+</body>
+</html>
